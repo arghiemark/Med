@@ -92,6 +92,7 @@ export const authOptions: NextAuthOptions = {
           token.name = dbUser.name
           token.email = dbUser.email
           token.image = dbUser.image
+          token.role = dbUser.role
         }
 
         token.id = user.id
@@ -104,6 +105,7 @@ export const authOptions: NextAuthOptions = {
       session.user.name = token.name as string
       session.user.email = token.email as string
       session.user.image = token.image as string
+      session.user.role = token.role as string
 
       return session
     },

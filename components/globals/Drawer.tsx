@@ -1,14 +1,20 @@
 'use client'
 
 import { useDrawer } from '@/store/useDrawer'
+import { useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { SCHOOL_NAME } from '@/config/constants'
-import { X } from 'lucide-react'
+import { X, Users } from 'lucide-react'
 
 export default function Drawer() {
-  // Store
   const open = useDrawer((state) => state.show)
   const toggle = useDrawer((state) => state.toggleShow)
+  const { data: session } = useSession()
+  const pathname = usePathname()
+
+  const isAdmin =
+    session?.user?.role === 'SUPERADMIN' || session?.user?.role === 'ADMIN'
 
   return (
     <div
@@ -23,11 +29,27 @@ export default function Drawer() {
             <Link href="/">{SCHOOL_NAME}</Link>
           </h1>
 
-          <button className="button button--circle -mr-3">
+          <button className="button button--circle">
             <X onClick={toggle} />
           </button>
         </div>
       </div>
+
+      {/* Nav */}
+      {isAdmin && (
+        <nav className="min-w-64 p-2 flex flex-col gap-1">
+          <Link
+            href="/dashboard/users"
+            onClick={toggle}
+            className={`flex items-center gap-3 px-3 py-2 rounded animated hover:bg-gray-300 ${
+              pathname === '/dashboard/users' ? 'bg-gray-300 font-medium' : ''
+            }`}
+          >
+            <Users size={20} />
+            <span>Users</span>
+          </Link>
+        </nav>
+      )}
     </div>
   )
 }

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ButtonSignOut } from '@/components/ButtonsAuth'
-import { User, UserPen, CircleUserRound, ShieldEllipsis } from 'lucide-react'
+import { User, UserPen, CircleUserRound, ShieldEllipsis, LayoutDashboard } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 
 export default function DrawerProfile() {
@@ -68,6 +68,17 @@ export default function DrawerProfile() {
             </div>
           </div>
           <div className="flex flex-col justify-center py-3 px-1">
+            {(session?.user?.role === 'SUPERADMIN' || session?.user?.role === 'ADMIN') && (
+              <Link
+                href="/dashboard"
+                className="hover:bg-gray-100 p-2 rounded animated"
+                onClick={() => setIsOpen(false)}
+              >
+                <LayoutDashboard className="inline mr-2 mb-1" />
+                Dashboard
+              </Link>
+            )}
+
             <Link
               href="/dashboard/user/profile"
               className="hover:bg-gray-100 p-2 rounded animated"
