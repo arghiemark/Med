@@ -67,9 +67,9 @@ export default function FormProfile({
     setPending(true)
 
     try {
-      const upload = await uploadMedia(me.id, imageFile)
+      const upload = await uploadMedia(imageFile)
 
-      if (upload.success) {
+      if (upload?.success) {
         setMe((prev: User) => ({
           ...prev,
           image: upload.payload.url,
@@ -106,23 +106,20 @@ export default function FormProfile({
     formData.append('removeProfile', 'true')
 
     try {
-      //
-      const update = await Promise.all([
-        deleteMedia(formRef.current, formData),
-        updateMe(formRef.current, formData),
-      ])
+      // Delete the blob first: deleteMedia verifies the URL is still the
+      // user's stored image, so it must run before updateMe nulls it.
+      const deleted = await deleteMedia(formRef.current, formData)
 
-      if (update[0].success) {
+      if (deleted.success) {
+        const updated = await updateMe(formRef.current, formData)
         setMe((prev: User) => ({
           ...prev,
           image: null,
         }))
-        sessionUpdate(update[1].payload)
+        sessionUpdate(updated.payload)
       }
-
-      console.log('update: ', update)
     } catch (error) {
-      console.log('error: ', error)
+      console.error('error: ', error)
     } finally {
       setPending(false)
     }

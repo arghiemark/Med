@@ -23,6 +23,25 @@ export default function FormSecurity({ className }: { className?: string }) {
       <div className="form__content">
         <div className=" flex flex-col gap-5">
           <div className="form-control">
+            <label htmlFor="current_password">Current Password*</label>
+            <div className="relative w-full ">
+              <input
+                required
+                name="current_password"
+                type="password"
+                className={`w-full ${
+                  state.errors?.current_password ? 'has-errors' : ''
+                }`}
+                placeholder="**************"
+              />
+            </div>
+            {/* Field Alert */}
+            {state.errors?.current_password && (
+              <div className="error">{state.errors.current_password}</div>
+            )}
+          </div>
+
+          <div className="form-control">
             <label htmlFor="new_password">New Password*</label>
             <div className="relative w-full ">
               <input

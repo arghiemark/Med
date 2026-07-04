@@ -1,5 +1,4 @@
 import { compare } from 'bcrypt'
-import { headers } from 'next/headers'
 import { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import prisma from '@/lib/prisma'
@@ -52,8 +51,6 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        // const header = await headers()
-        // const ip = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0]
         await prisma.user.update({
           where: {
             email: credentials.email,
@@ -72,12 +69,19 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
-      // See profile form handle for sample usage
-      if (trigger === 'update' && session?.name && session?.email) {
-        token.name = session.name
-        token.email = session.email
-        token.image = session.image
+    async jwt({ token, user, trigger }) {
+      // On profile update, re-read the authoritative record from the DB rather
+      // than trusting client-supplied session fields.
+      if (trigger === 'update' && token.id) {
+        const dbUser = await prisma.user.findFirst({
+          where: { id: +(token.id as string), deletedAt: null },
+        })
+        if (dbUser) {
+          token.name = dbUser.name
+          token.email = dbUser.email
+          token.image = dbUser.image
+          token.role = dbUser.role
+        }
       }
 
       if (user) {
@@ -94,8 +98,6 @@ export const authOptions: NextAuthOptions = {
           token.image = dbUser.image
           token.role = dbUser.role
         }
-
-        token.id = user.id
       }
       return token
     },

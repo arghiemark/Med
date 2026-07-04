@@ -70,7 +70,7 @@ export default function UsersTable({
 
   function handleAdd(formData: FormData) {
     startTransition(async () => {
-      const result = await createUser(null, formData)
+      const result: any = await createUser(null, formData)
       if (result.success) {
         closeModal()
         router.refresh()
@@ -87,7 +87,7 @@ export default function UsersTable({
 
   function handleEdit(formData: FormData) {
     startTransition(async () => {
-      const result = await updateUser(null, formData)
+      const result: any = await updateUser(null, formData)
       if (result.success) {
         closeModal()
         router.refresh()

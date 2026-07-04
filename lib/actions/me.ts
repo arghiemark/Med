@@ -1,12 +1,15 @@
 'use server'
 
 import prisma from '@/lib/prisma'
-import { hash } from 'bcrypt'
+import { hash, compare } from 'bcrypt'
 import { cache } from 'react'
 import { cacheLife, cacheTag, revalidateTag } from 'next/cache'
 import { getServerSession, Session } from 'next-auth'
 import { authOptions } from '@/lib/authOptions'
 import { isValidEmail } from '@/lib/helper'
+import { sanitizeUser } from '@/lib/actions/guard'
+
+const MIN_PASSWORD_LENGTH = 8
 
 const table = 'user'
 
@@ -42,7 +45,7 @@ async function getMeData(id: string) {
 
     return {
       success: true,
-      payload: me,
+      payload: sanitizeUser(me),
       message: 'My data fetched successfully!',
     }
   } catch (error) {
@@ -94,8 +97,6 @@ export async function updateMe(_prevState: User, formData: FormData) {
     if (email) updateData.email = email
     if (image) updateData.image = image
 
-    console.log('updateData: ', updateData)
-
     // Handle profile image removal
     if (removeImage) {
       updateData.image = null
@@ -139,6 +140,7 @@ export async function updateMe(_prevState: User, formData: FormData) {
     const userExist = await prisma[table].findFirst({
       where: {
         email: email,
+        deletedAt: null,
       },
     })
 
@@ -165,7 +167,7 @@ export async function updateMe(_prevState: User, formData: FormData) {
 
     return {
       success: true,
-      payload: updatedUser,
+      payload: sanitizeUser(updatedUser),
       message: 'Profile updated successfully!',
     }
   } catch (error) {
@@ -191,12 +193,14 @@ export async function updateMePassword(_prevState: User, formData: FormData) {
 
   const id = session.user.id
 
+  const current_password = formData.get('current_password')?.toString().trim()
   const new_password = formData.get('new_password')?.toString().trim()
   const confirm_password = formData.get('confirm_password')?.toString().trim()
 
   let errors: Record<string, string> = {}
 
   const requiredFields = [
+    { key: 'current_password', label: 'Current Password', value: current_password },
     { key: 'new_password', label: 'New Password', value: new_password },
     {
       key: 'confirm_password',
@@ -219,8 +223,8 @@ export async function updateMePassword(_prevState: User, formData: FormData) {
   }
 
   // Password strength validation
-  if (new_password && new_password.length < 8) {
-    errors['new_password'] = 'New password must be at least 8 characters long.'
+  if (new_password && new_password.length < MIN_PASSWORD_LENGTH) {
+    errors['new_password'] = `New password must be at least ${MIN_PASSWORD_LENGTH} characters long.`
   }
 
   // Return errors if any exist
@@ -234,6 +238,19 @@ export async function updateMePassword(_prevState: User, formData: FormData) {
   }
 
   try {
+    // Verify the current password before allowing a change.
+    const me = await prisma[table].findFirst({
+      where: { id: +id, deletedAt: null },
+    })
+    if (!me || !me.password || !(await compare(current_password!, me.password))) {
+      return {
+        success: false,
+        errors: { current_password: 'Current password is incorrect.' },
+        input: { id },
+        message: null,
+      }
+    }
+
     // Hash the new password
     const hashedPassword = await hash(new_password, 12)
 
@@ -247,7 +264,7 @@ export async function updateMePassword(_prevState: User, formData: FormData) {
 
     return {
       success: true,
-      payload: updatedUser,
+      payload: sanitizeUser(updatedUser),
       message: 'Password updated successfully.',
     }
   } catch (error) {

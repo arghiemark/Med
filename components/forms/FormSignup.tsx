@@ -1,7 +1,7 @@
 'use client'
 
 import { useActionState, useEffect, useRef } from 'react'
-import { createUser } from '@/lib/actions/user'
+import { signupUser } from '@/lib/actions/user'
 import { useRouter } from 'next/navigation'
 
 export default function FormSignup({ className }: { className?: string }) {
@@ -12,7 +12,7 @@ export default function FormSignup({ className }: { className?: string }) {
   const formRef = useRef<HTMLFormElement>(null)
 
   // States
-  const [state, handleSubmit, pending] = useActionState(createUser, {})
+  const [state, handleSubmit, pending] = useActionState(signupUser, {})
 
   useEffect(() => {
     if (state?.success && formRef.current) {

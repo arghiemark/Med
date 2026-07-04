@@ -1,23 +1,33 @@
-export { default } from 'next-auth/middleware'
 import { NextResponse, NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 import { JWT } from 'next-auth/jwt'
 
 interface Token extends JWT {
-  role?: number
+  role?: string
 }
 
+const ADMIN_ROLES = ['SUPERADMIN', 'ADMIN']
+
 export async function proxy(req: NextRequest) {
-  const token: Token | null = await getToken({
+  const token = (await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
-  })
+  })) as Token | null
   const { pathname } = req.nextUrl
 
+  // Unauthenticated users cannot reach the dashboard.
   if (pathname.startsWith('/dashboard') && !token) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
+  // Defense in depth: only admins may reach user management (page also checks).
+  if (pathname.startsWith('/dashboard/users')) {
+    if (!token || !ADMIN_ROLES.includes(token.role ?? '')) {
+      return NextResponse.redirect(new URL('/dashboard', req.url))
+    }
+  }
+
+  // Signed-in users skip the login page.
   if (pathname.startsWith('/login') && token) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
@@ -26,8 +36,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/dashboard/:path*',
-    '/app/:path*', // Add api routes here?
-  ],
+  matcher: ['/dashboard/:path*', '/login'],
 }
