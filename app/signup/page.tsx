@@ -10,7 +10,7 @@ export default function Signup() {
             <h1>Signup</h1>
 
             <div>
-              <FormSignup className="w-full max-w-80" /> bbb
+              <FormSignup className="w-full max-w-80" />
             </div>
 
             <div className="mt-7 flex flex-col gap-3 text-center">
