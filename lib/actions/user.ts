@@ -139,6 +139,7 @@ async function persistNewUser(data: { name: string; email: string; password: str
 
     return { success: true, message: "User created successfully", payload: sanitizeUser(user) }
   } catch {
+    
     return { success: false, payload: null, message: "Failed to create user" }
   }
 }
