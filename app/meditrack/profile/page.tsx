@@ -86,8 +86,8 @@ export default function ProfilePage() {
 
       <div className="grid grid-cols-3 gap-[22px] max-[1100px]:grid-cols-1">
         <div className={`col-span-1 flex flex-col items-center ${darkMode ? 'bg-[#2d1b4e] border-[rgba(255,255,255,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3)]' : 'bg-white border-[rgba(15,60,95,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]'} p-[30px] rounded-[18px] border`}>
-          <div className="relative mb-4">
-            <div className="w-[120px] h-[120px] rounded-full bg-[#4E69D3] flex items-center justify-center text-white font-bold text-[40px] overflow-hidden">
+          <div className="relative mb-6">
+            <div className="w-[200px] h-[200px] rounded-full bg-[#4E69D3] flex items-center justify-center text-white font-bold text-[64px] overflow-hidden">
               {photo ? (
                 <img src={photo} alt="Profile" className="w-full h-full object-cover" />
               ) : (
@@ -95,17 +95,17 @@ export default function ProfilePage() {
               )}
             </div>
             <button
-              className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-white border-2 border-[#4E69D3] flex items-center justify-center cursor-pointer hover:bg-[#EEF0FB] transition-colors shadow-md"
+              className="absolute bottom-2 right-2 w-11 h-11 rounded-full bg-white border-2 border-[#4E69D3] flex items-center justify-center cursor-pointer hover:bg-[#EEF0FB] transition-colors shadow-md"
               onClick={() => setCropModal({ src: photo })}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="#4E69D3" strokeWidth="2" className="w-4 h-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#4E69D3" strokeWidth="2" className="w-5 h-5">
                 <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
               </svg>
             </button>
           </div>
-          <h2 className={`text-[24px] font-bold m-0 ${darkMode ? 'text-[#F9FAFB]' : 'text-[#111]'}`}>{form.name}</h2>
-          <span className="text-[13px] font-bold text-[#4E69D3] uppercase tracking-[0.5px] mt-1">{form.id}</span>
-          <span className={`text-[15px] mt-1 ${darkMode ? 'text-[#F9FAFB]' : 'text-[#555]'}`}>{form.role}</span>
+          <h2 className={`text-[28px] font-bold mt-3 m-0 ${darkMode ? 'text-[#F9FAFB]' : 'text-[#111]'}`}>{form.name}</h2>
+          <span className="text-[15px] font-bold text-[#4E69D3] uppercase tracking-[0.5px] mt-1">{form.id}</span>
+          <span className={`text-[17px] mt-1 ${darkMode ? 'text-[#F9FAFB]' : 'text-[#555]'}`}>{form.role}</span>
           <div className={`flex items-center gap-2 mt-4 px-4 py-2 rounded-lg ${darkMode ? 'bg-[#0f1438]' : 'bg-[#E8EAF6]'}`}>
             <svg viewBox="0 0 24 24" fill="none" stroke="#4E69D3" strokeWidth="2" className="w-4 h-4">
               <rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><path d="M8 21h8" /><path d="M12 17v4" />
@@ -263,15 +263,15 @@ function CropModal({ src, darkMode, onSave, onCancel }: { src: string | null; da
     const natSize = SIZE / scale
 
     const outCanvas = document.createElement('canvas')
-    outCanvas.width = 120
-    outCanvas.height = 120
+    outCanvas.width = 200
+    outCanvas.height = 200
     const outCtx = outCanvas.getContext('2d')
     if (!outCtx) return
 
     outCtx.beginPath()
-    outCtx.arc(60, 60, 60, 0, Math.PI * 2)
+    outCtx.arc(100, 100, 100, 0, Math.PI * 2)
     outCtx.clip()
-    outCtx.drawImage(img, natLeft, natTop, natSize, natSize, 0, 0, 120, 120)
+    outCtx.drawImage(img, natLeft, natTop, natSize, natSize, 0, 0, 200, 200)
 
     onSave(outCanvas.toDataURL('image/jpeg', 0.9))
   }

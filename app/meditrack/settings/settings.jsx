@@ -187,11 +187,11 @@ export default function Settings({ darkMode, setDarkMode, onLogout }) {
     <div>
       <h1 className={`text-[32px] ${darkMode ? 'text-[#F9FAFB]' : 'text-[#1d4662]'} my-[14px] text-left`}>Account Settings</h1>
       <div className="flex gap-[22px] items-start max-[900px]:flex-col">
-        <div className={`w-[260px] flex-shrink-0 ${darkMode ? 'bg-[#2d1b4e] border-[rgba(255,255,255,0.10)]' : 'bg-white border-[rgba(15,60,95,0.10)]'} border rounded-[18px] py-2 overflow-hidden shadow-[0_4px_6px_-1px_rgba(0,0,0,0.06)] max-[900px]:w-full max-[900px]:flex max-[900px]:overflow-x-auto`}>
+        <div className={`w-[260px] flex-shrink-0 ${darkMode ? 'bg-[#3d2266] border-[rgba(255,255,255,0.10)]' : 'bg-white border-[rgba(15,60,95,0.10)]'} border rounded-[18px] py-2 overflow-hidden shadow-[0_4px_6px_-1px_rgba(0,0,0,0.06)] max-[900px]:w-full max-[900px]:flex max-[900px]:overflow-x-auto`}>
           {sections.map(s => (
             <button
               key={s.id}
-              className={`w-full flex items-center gap-3 px-5 py-2.5 border-none bg-transparent text-sm font-semibold font-poppins cursor-pointer text-left transition-colors whitespace-nowrap max-[900px]:flex-shrink-0 ${
+              className={`w-full flex items-center gap-3 px-5 py-2.5 border-none bg-transparent text-[15px] font-semibold font-poppins cursor-pointer text-left transition-colors whitespace-nowrap max-[900px]:flex-shrink-0 ${
                 active === s.id
                   ? darkMode ? 'bg-[#0f1438] text-[#4E69D3]' : 'bg-[#E8EAF6] text-[#4E69D3]'
                   : darkMode ? 'text-[#F9FAFB] hover:bg-[#0f1438]' : 'text-[#2A2E43] hover:bg-gray-50'
@@ -203,13 +203,13 @@ export default function Settings({ darkMode, setDarkMode, onLogout }) {
           ))}
           <div className={`h-px mx-5 my-1.5 ${darkMode ? 'bg-[rgba(255,255,255,0.10)]' : 'bg-gray-200'}`} />
           <button
-            className={`w-full flex items-center gap-3 px-5 py-2.5 border-none bg-transparent text-sm font-semibold font-poppins cursor-pointer text-left transition-colors whitespace-nowrap max-[900px]:flex-shrink-0 text-red-500 ${darkMode ? 'hover:bg-[#0f1438]' : 'hover:bg-red-50'}`}
+            className={`w-full flex items-center gap-3 px-5 py-2.5 border-none bg-transparent text-[15px] font-semibold font-poppins cursor-pointer text-left transition-colors whitespace-nowrap max-[900px]:flex-shrink-0 text-red-500 ${darkMode ? 'hover:bg-[#0f1438]' : 'hover:bg-red-50'}`}
             onClick={onLogout}
           >
             Log Out
           </button>
         </div>
-        <div className={`flex-1 ${darkMode ? 'bg-[#2d1b4e] border-[rgba(255,255,255,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3)]' : 'bg-white border-[rgba(15,60,95,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]'} p-[22px] rounded-[18px] border`}>
+        <div className={`flex-1 ${darkMode ? 'bg-[#3d2266] border-[rgba(255,255,255,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3)]' : 'bg-white border-[rgba(15,60,95,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]'} p-[22px] rounded-[18px] border`}>
           {renderContent()}
         </div>
       </div>

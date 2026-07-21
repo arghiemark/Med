@@ -151,16 +151,16 @@ export default function PatientRecordPage() {
 
   return (
     <div className={`${darkMode ? 'bg-[#2d1b4e]' : 'bg-white'} rounded-2xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)]`}>
-      <h1 className={`font-poppins text-[31px] font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-center m-0 mb-6`}>PATIENT RECORD LIST</h1>
+      <h1 className={`font-poppins text-[37px] font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-center m-0 mb-6`}>PATIENT RECORD LIST</h1>
 
       <div className="flex justify-between items-center gap-4 mb-5 flex-wrap">
         <div className="flex items-center gap-3 flex-wrap">
           <div className="relative flex items-center">
             <svg className={`absolute left-3 w-4 h-4 ${darkMode ? 'text-[#F9FAFB]' : 'text-gray-400'} pointer-events-none`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            <input type="text" placeholder="Search by patient name or ID" className={`w-[240px] pl-9 pr-3.5 py-2.5 ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-gray-200'} rounded-lg text-[13px] font-poppins ${darkMode ? 'text-[#F9FAFB] bg-[#2d1b4e]' : 'text-gray-800 bg-white'} outline-none focus:border-[#4E69D3] ${darkMode ? 'placeholder-gray-500' : 'placeholder-gray-400'}`} />
+            <input type="text" placeholder="Search by patient name or ID" className={`w-[280px] pl-9 pr-3.5 py-2.5 ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-gray-200'} rounded-lg text-[15px] font-poppins ${darkMode ? 'text-[#F9FAFB] bg-[#2d1b4e]' : 'text-gray-800 bg-white'} outline-none focus:border-[#4E69D3] ${darkMode ? 'placeholder-gray-500' : 'placeholder-gray-400'}`} />
           </div>
-          <div className="relative flex items-center">
-            <select className={`py-2.5 pl-3 pr-9 ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-gray-200'} rounded-lg text-[13px] font-poppins ${darkMode ? 'text-[#F9FAFB] bg-[#2d1b4e]' : 'text-gray-800 bg-white'} outline-none focus:border-[#4E69D3] appearance-none cursor-pointer min-w-[120px]`}>
+          <div className="relative flex items-center ml-13">
+            <select className={`py-2.5 pl-3 pr-9 ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-gray-200'} rounded-lg text-[15px] font-poppins ${darkMode ? 'text-[#F9FAFB] bg-[#2d1b4e]' : 'text-gray-800 bg-white'} outline-none focus:border-[#4E69D3] appearance-none cursor-pointer min-w-[120px]`}>
               <option>All Puroks</option>
               {puroks.map(p => <option key={p}>{p}</option>)}
             </select>
@@ -182,12 +182,12 @@ export default function PatientRecordPage() {
       <div className={`overflow-x-auto ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-gray-200'} rounded-xl`}>
         <table className="w-full border-collapse text-[15px]">
           <thead>
-            <tr className={`${darkMode ? 'bg-[#0f1438]' : 'bg-gray-50'}`}>
-              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#718096]'} text-[14px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[#E2E8F0]'} border-b`}>Name</th>
-              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#718096]'} text-[14px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[#E2E8F0]'} border-b`}>ID</th>
-              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#718096]'} text-[14px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[#E2E8F0]'} border-b`}>Purok</th>
-              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#718096]'} text-[14px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[#E2E8F0]'} border-b`}>Date Recorded</th>
-              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#718096]'} text-[14px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[#E2E8F0]'} border-b`}>Actions</th>
+            <tr className={`${darkMode ? 'bg-[#0f1438]' : 'bg-[#ddd6fe]'}`}>
+              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-[15px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[rgba(255,255,255,0.20)]'} border-b`}>Name</th>
+              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-[15px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[rgba(255,255,255,0.20)]'} border-b`}>ID</th>
+              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-[15px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[rgba(255,255,255,0.20)]'} border-b`}>Purok</th>
+              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-[15px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[rgba(255,255,255,0.20)]'} border-b`}>Date Recorded</th>
+              <th className={`px-4 py-3 text-left font-bold ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'} text-[15px] uppercase tracking-[0.5px] font-poppins ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-[rgba(255,255,255,0.20)]'} border-b`}>Actions</th>
             </tr>
           </thead>
           <tbody>

@@ -83,7 +83,7 @@ export default function Homepage() {
 
   return (
     <div>
-      <h1 className={`text-[32px] ${darkMode ? 'text-[#F9FAFB]' : 'text-[#1d4662]'} my-[14px] text-left`}>Hello! Midwife Vivianne</h1>
+      <h1 className={`text-[45px] ${darkMode ? 'text-[#F9FAFB]' : 'text-[#1d4662]'} my-[14px] text-left`}>Hello! Midwife Vivianne</h1>
 
       <div className="grid grid-cols-3 gap-[22px] mb-7 max-[1100px]:grid-cols-2 max-[600px]:grid-cols-1">
         <div className={`flex items-center gap-4 ${darkMode ? 'bg-[#2d1b4e] border-[rgba(255,255,255,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3)]' : 'bg-white border-[rgba(15,60,95,0.10)] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]'} p-[22px] rounded-[18px] border`}>

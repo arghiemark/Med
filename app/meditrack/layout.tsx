@@ -41,7 +41,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         * { scrollbar-width: thin; scrollbar-color: #aaa #e0e0e0; }
       `}</style>
       <aside className={`w-[360px] ${darkMode ? 'bg-[#050617] border-[rgba(255,255,255,0.08)]' : 'bg-[#F9F9F9] border-[rgba(15,60,95,0.12)]'} border-r fixed top-0 left-0 h-screen flex flex-col gap-5 pt-8 pb-6 px-5 shadow-[0_24px_60px_rgba(15,60,95,0.12)] overflow-hidden`}>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 pl-4">
           <div className="w-[68px] h-[68px] flex-shrink-0">
             <img src="/meditrack-logo.png" alt="MediTrack" className="w-full h-full object-contain" />
           </div>
@@ -57,10 +57,10 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href !== '/meditrack' && (pathname.startsWith(item.href + '/') || pathname.startsWith(item.href)))
               return (
-                <li key={item.href} className={`rounded-[10px] transition-colors duration-300 ${isActive ? (darkMode ? 'bg-[#2d1b4e]' : 'bg-[#E8E8E8]/80') : (darkMode ? 'hover:bg-[#050617]/50' : 'hover:bg-[#E8E8E8]/50')}`}>
+                <li key={item.href} className={`rounded-[10px] transition-colors duration-300 ${isActive ? (darkMode ? 'bg-[#2d1b4e]' : 'bg-[#ddd6fe]') : (darkMode ? 'hover:bg-[#050617]/50' : 'hover:bg-[#E8E8E8]/50')}`}>
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-3.5 px-4 py-3.5 no-underline font-poppins text-[16px] text-left truncate ${isActive ? 'text-[#4E69D3] font-bold' : darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43] font-normal'}`}
+                    className={`flex items-center gap-3.5 px-4 py-3.5 no-underline font-poppins text-[17px] text-left truncate ${isActive ? (darkMode ? 'text-white font-bold' : 'text-[#4E69D3] font-bold') : darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43] font-normal'}`}
                   >
                     <span className="inline-flex items-center justify-center w-[44px] h-[44px] flex-shrink-0">
                       <img src={item.icon} alt="" className="w-7 h-7 object-contain" />
@@ -104,7 +104,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
       </aside>
 
       <main className="flex-1 ml-[360px] flex flex-col">
-        <div className={`flex items-center justify-between pl-7 pr-0 py-5 ${darkMode ? 'bg-[#050617]' : 'bg-[#ddd6fe]'}`}>
+        <div className={`flex items-center justify-between pl-7 pr-0 py-5 ${darkMode ? 'bg-[rgba(45,27,78,0.65)]' : 'bg-white/65'}`}>
           <div className="flex-1" />
           <div className="flex items-center gap-3 text-[18px] text-[#5a6b76] pr-4">
             <button onClick={() => { setNotifOpen(!notifOpen); setProfileOpen(false) }} className="relative">
