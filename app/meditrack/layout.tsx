@@ -51,19 +51,19 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <nav className="flex-1 mt-2">
-          <p className="font-poppins text-[11px] font-bold text-gray-400 uppercase tracking-[1px] mb-2 pl-3">Menu</p>
-          <ul className="list-none p-0 m-0 flex flex-col gap-0.5">
+        <nav className="flex-1 mt-4">
+          <p className="font-poppins text-[11px] font-bold text-gray-400 uppercase tracking-[1px] mb-3 pl-4">Menu</p>
+          <ul className="list-none p-0 m-0 flex flex-col gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.href !== '/meditrack' && (pathname.startsWith(item.href + '/') || pathname.startsWith(item.href)))
               return (
-                <li key={item.href} className={`rounded-[10px] transition-colors duration-300 ${isActive ? (darkMode ? 'bg-[#2d1b4e]' : 'bg-[#ddd6fe]') : (darkMode ? 'hover:bg-[#050617]/50' : 'hover:bg-[#E8E8E8]/50')}`}>
+                <li key={item.href} className={`rounded-[12px] transition-colors duration-300 ${isActive ? (darkMode ? 'bg-[#2d1b4e]' : 'bg-[#ddd6fe]') : (darkMode ? 'hover:bg-[#050617]/50' : 'hover:bg-[#E8E8E8]/50')}`}>
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-3.5 px-4 py-3.5 no-underline font-poppins text-[17px] text-left truncate ${isActive ? (darkMode ? 'text-white font-bold' : 'text-[#4E69D3] font-bold') : darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43] font-normal'}`}
+                    className={`flex items-center gap-3.5 px-5 py-4 no-underline font-poppins text-[16px] text-left truncate ${isActive ? (darkMode ? 'text-white font-bold' : 'text-[#4E69D3] font-bold') : darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43] font-normal'}`}
                   >
-                    <span className="inline-flex items-center justify-center w-[44px] h-[44px] flex-shrink-0">
-                      <img src={item.icon} alt="" className="w-7 h-7 object-contain" />
+                    <span className="inline-flex items-center justify-center w-7 h-7 flex-shrink-0">
+                      <img src={item.icon} alt="" className="w-6 h-6 object-contain" />
                     </span>
                     {item.label}
                   </Link>
@@ -74,31 +74,11 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         </nav>
 
         <div className={`border-t pt-3 mt-auto ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-          <Link
-            href="/meditrack/profile"
-            className={`flex items-center gap-3 px-4 py-3 rounded-[10px] transition-colors cursor-pointer no-underline ${darkMode ? 'hover:bg-[#050617]/50' : 'hover:bg-[#E8E8E8]/50'}`}
-          >
-            <div className="w-10 h-10 rounded-full bg-[#4E69D3] flex items-center justify-center text-white font-bold text-sm flex-shrink-0 overflow-hidden">
-              {photo ? <img src={photo} alt="" className="w-full h-full object-cover" /> : 'VH'}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className={`font-poppins text-sm font-bold m-0 truncate ${darkMode ? 'text-gray-200' : 'text-[#2A2E43]'}`}>Vivianne Hernandez</p>
-              <p className="font-poppins text-[11px] text-gray-500 m-0 truncate">MW-0001 · Midwife</p>
-            </div>
-          </Link>
-          <div className={`flex items-center justify-between px-4 py-3 rounded-[10px] transition-colors cursor-pointer ${darkMode ? 'hover:bg-[#050617]/50' : 'hover:bg-[#E8E8E8]/50'}`}>
-            <div className="flex items-center gap-3.5">
-              <span className="inline-flex items-center justify-center w-10 h-10 flex-shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`w-5 h-5 ${darkMode ? 'text-[#F9FAFB]' : 'text-gray-500'}`}>
-                  <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-                </svg>
-              </span>
-              <span className={`font-poppins text-sm font-semibold ${darkMode ? 'text-gray-200' : 'text-[#2A2E43]'}`}>Dark Mode</span>
-            </div>
-            <label className="relative inline-block w-[38px] h-5 cursor-pointer">
-              <input type="checkbox" className="opacity-0 w-0 h-0 peer" checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-              <span className="absolute inset-0 bg-gray-300 rounded-full transition-colors peer-checked:bg-[#4E69D3] after:content-[''] after:absolute after:h-4 after:w-4 after:left-[2px] after:bottom-[2px] after:bg-white after:rounded-full after:transition-transform peer-checked:after:translate-x-[18px]" />
-            </label>
+          <div className="flex items-center justify-center gap-1.5">
+            <span className="text-gray-400 text-base font-medium">&copy;</span>
+            <p className={`font-poppins text-[15px] text-center ${darkMode ? 'text-gray-400' : 'text-gray-400'}`}>
+              Meditrack Developers
+            </p>
           </div>
         </div>
       </aside>
@@ -153,7 +133,7 @@ function NotificationDropdown({ onClose, darkMode }: { onClose: () => void; dark
   return (
     <>
       <div className="fixed inset-0 z-[199]" onClick={onClose} />
-      <div className={`absolute top-[70px] right-0 w-[400px] max-h-[520px] rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.15)] z-[200] flex flex-col overflow-hidden animate-[slideIn_0.2s_ease] ${darkMode ? 'bg-[#050617]' : 'bg-white'}`}>
+      <div className={`absolute top-[70px] right-0 w-[450px] max-h-[520px] rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.15)] z-[200] flex flex-col overflow-hidden animate-[slideIn_0.2s_ease] ${darkMode ? 'bg-[#050617]' : 'bg-white'}`}>
         <div className={`flex items-center justify-between px-5 py-4 border-b ${darkMode ? 'border-[rgba(255,255,255,0.10)]' : 'border-gray-200'}`}>
           <h3 className={`font-poppins text-lg font-bold m-0 ${darkMode ? 'text-[#F9FAFB]' : 'text-[#2A2E43]'}`}>Notifications</h3>
           <div className="flex items-center gap-2">

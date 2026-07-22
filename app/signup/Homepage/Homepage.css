@@ -137,7 +137,7 @@ opencod.appointment-layout {
 .profile-photo{ width:36px; height:36px; border-radius:50%; background:#2ea3e6; color:white; display:flex; align-items:center; justify-content:center; font-weight:700; margin-left:8px; }
 .user-info{ display:flex; align-items:center; gap:10px; font-size:18px; color:#5a6b76; }
 
-.greeting{ font-size:60px; color:#1d4662; margin:18px 0 18px 0; text-align:left; }
+.greeting{ font-size:90px; color:#1d4662; margin:18px 0 18px 0; text-align:left; }
 
 .frame{ background: #ffffff; border:1px solid rgba(15, 60, 95, 0.08); padding:24px; border-radius:24px; margin-bottom:28px; box-shadow: 0 20px 45px rgba(15, 60, 95, 0.08); }
 .frame + .frame { margin-top: 32px; }
